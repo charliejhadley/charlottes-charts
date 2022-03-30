@@ -13,3 +13,11 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
+<d-byline></d-byline>
+
+# Welcome!
+
+This is Charlotte Hadley's blog. You'll usually see me as [charliejhadley](https://twitter.com/charliejhadley), but I go by any (of the many) contractions of Charlotte.
+
+This blog mostly contains data visualisations and code dumps in the R language.
+
