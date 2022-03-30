@@ -1,0 +1,287 @@
+---
+title: "Advent calendars in March"
+description: |
+  Rehousing an out of date script.
+author:
+  - name: Charlie Joey Hadley
+date: 2022-03-30
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(patchwork)
+library(janitor)
+```
+
+Back in 2018 I set myself the goal of an [advent of R tips with a photo of a Christmassy coffee](https://www.findingyourway.io/blog/2018/11/28/2018-11-28-christmas-drinks-ggplot2-advent-calendar-2018/). It was an unwise decision, there weren't enough good festive coffees for 24 enjoyable drinks. I created a script to create this animated GIF in {ggplot2}.
+
+![](gg_animated_door_openings.gif)
+
+The original blogpost went [really hard on trying to make a reproducible advent calendar](https://www.findingyourway.io/blog/2018/11/28/2018-11-28-christmas-drinks-ggplot2-advent-calendar-2018/). The goal of this blog is to give me a nice and quick way to show stuff. So away with that. Here's some useful code I might reuse.
+
+To start this chart off we need to create our doors and find their centres:
+
+```{r door-centres}
+set.seed(1)
+portrait_door_centers <- tibble(
+  x = rep(seq(1, 10, 3), 6),
+  y = rep(seq(1, 16, 3), times = 1, each = 4),
+  door_number = sample(1:24))
+set.seed(1)
+landscape_door_centers <- tibble(
+  y = rep(seq(1, 10, 3), 6),
+  x = rep(seq(1, 16, 3), times = 1, each = 4),
+  door_number = sample(1:24))
+```
+
+Now we can chart these
+
+```{r, fig.height=2.5, fig.width=5}
+gg_advent_portrait <- portrait_door_centers %>%
+  ggplot(aes(x, y)) +
+  geom_tile(color = "black",
+            size = 0.6,
+            linetype = "dotted",
+            alpha = 0) +
+  geom_label(aes(label = door_number)) +
+  coord_fixed() +
+  theme_void() +
+  NULL
+
+gg_advent_landscape <- landscape_door_centers %>%
+  ggplot(aes(x, y)) +
+  geom_tile(color = "black",
+            size = 0.6,
+            linetype = "dotted",
+            alpha = 0) +
+  geom_label(aes(label = door_number)) +
+  coord_fixed() +
+  theme_void() +
+  NULL
+
+gg_advent_landscape + gg_advent_portrait
+```
+
+I saved all the Christmassy drinks into a .csv file which requires a little bit of wrangling.
+
+```{r}
+read_csv(here::here("_posts", "2022-03-30-advent-calendars-in-march" , "24-days-of-christmassy-drinks.csv"))
+```
+
+```{r import-drinks}
+christmassy_drinks_2018 <- read_csv(here::here("_posts", "2022-03-30-advent-calendars-in-march" , "24-days-of-christmassy-drinks.csv")) %>%
+  clean_names() %>% 
+  filter(year == 2018) %>%
+  slice(landscape_door_centers$door_number) %>%
+  mutate(door_number = 1:24)
+
+landscape_door_treats <- christmassy_drinks_2018 %>%
+  left_join(landscape_door_centers)
+
+landscape_door_treats <- landscape_door_treats %>%
+  mutate(drink_name = str_wrap(drink_name, 20))
+```
+
+These can be added to the squares:
+
+```{r}
+gg_landscape_door_treats <- landscape_door_treats %>%
+  ggplot(aes(x, y)) +
+  geom_tile(color = "black",
+            size = 0.6,
+            linetype = "dotted",
+            alpha = 0) +
+  geom_label(aes(label = drink_name),
+             nudge_y = 0.5, # give room for logo
+             size = 4) +
+  theme_void() +
+  coord_fixed()
+gg_landscape_door_treats
+```
+
+I've chosen to use annotation_custom() to add the images to the calendar, which requires {magick} and {grid} to read in the data and create rasterGrob objects.
+
+```{r}
+library(magick)
+library(grid)
+coffee_house_logos <- list.files(here::here("_posts", "2022-03-30-advent-calendars-in-march"), pattern = "logo", full.names = TRUE)
+
+coffee_house_names <- str_remove(basename(coffee_house_logos), "_.*") %>% 
+  str_replace("-", " ") %>% 
+  str_to_title() %>% 
+  str_replace("Mccafe", "McCafé") %>% 
+  str_replace("Cafe Nero", "Café Nero")
+
+coffee_house_names
+
+coffee_house_data <- set_names(coffee_house_logos, coffee_house_names)
+
+make_logo_grob <- function(img_path){
+  
+  image_read(img_path) %>%
+  rasterGrob(interpolate = T)
+  
+}
+
+coffee_house_grobs <- map(coffee_house_data, ~ make_logo_grob(.x))
+```
+
+I then use `pwalk()` to iteratively add the logos:
+
+```{r blog-add-logos-to-doors, eval = FALSE}
+gg_logoed_treats <- gg_landscape_door_treats
+
+landscape_door_treats %>%
+  pwalk(function(x, y, retailer, ...){
+    
+    logo <- coffee_house_grobs[[retailer]]
+      
+    gg_logoed_treats <<- gg_logoed_treats +
+      annotation_custom(logo, ymin = y - 1.25, ymax = y - 0.25, xmin = x - 0.5, xmax = x + 0.5)
+    
+  })
+gg_logoed_treats
+```
+
+## Iteratively opening the doors
+
+The next thing I did was find a Christmassy background image so I could iteratively open up doors. The {ggpubr} package provides background_image() for adding the image:
+
+```{r}
+library(ggpubr)
+christmassy_background <- image_read(here::here("_posts", "2022-03-30-advent-calendars-in-march", "santa-3016939_640.jpg"))
+
+cardboard_background <- image_read(here::here("_posts", "2022-03-30-advent-calendars-in-march", "cardboard-effect.jpg"))
+
+gg_advent_landscape <- landscape_door_centers %>%
+  ggplot(aes(x, y)) +
+  background_image(christmassy_background) +
+  geom_tile(color = "black",
+            size = 0.6,
+            linetype = "dotted",
+            alpha = 0) +
+  geom_label(aes(label = door_number)) +
+  theme_void() +
+  coord_fixed()
+gg_advent_landscape
+```
+
+Here's a function to iteratively open doors:
+
+```{r blog-open-advent-doors-function}
+open_advent_doors <- function(gg_advent,
+                              advent_treats,
+                              open_doors) {
+  gg_local <- gg_advent
+
+  advent_treats %>%
+    filter(door_number %in% open_doors) %>%
+    pwalk(function(x, y, retailer, drink_name, ...) {
+      
+      logo <- coffee_house_grobs[[retailer]]
+      
+      gg_local <<- gg_local +
+        annotation_custom(
+          cardboard_background %>%
+            image_crop("-200x400") %>%
+            rasterGrob(interpolate = T),
+          ymin = y - 1.5,
+          ymax = y + 1.5,
+          xmin = x - 2,
+          xmax = x + 2
+        ) +
+        annotation_custom(
+          logo,
+          ymin = y - 1.25,
+          ymax = y - 0.25,
+          xmin = x - 0.5,
+          xmax = x + 0.5
+        ) +
+        geom_label(
+          data = tibble(x, y, drink_name),
+          aes(
+            label = drink_name,
+            x = x,
+            y = y
+          ),
+          nudge_y = 0.5,
+          # give room for logo
+          size = 5
+        )
+    })
+
+  gg_local
+}
+```
+
+Here's the calendar after opening 10 doors:
+
+```{r internal-open-10-doors}
+open_advent_doors(gg_advent_landscape,
+                    landscape_door_treats,
+                    1:10)
+```
+
+To animate the doors opening I would like to use {gganimate} but I'm not sure it'll handle this? So instead I programmtically generate a GIF.
+
+```{r blog-export-advent-gif, eval = FALSE}
+tibble(remaining_days = 1:24) %>%
+  rowwise() %>%
+  mutate(doors = list(1:remaining_days)) %>%
+  pwalk(function(doors, ...) {
+    opened_door <- open_advent_doors(
+      gg_advent_landscape,
+      landscape_door_treats,
+      doors
+    )
+
+    img_path <- here::here(
+        "_posts", 
+        "2022-03-30-advent-calendars-in-march",
+        paste0(
+          "gg_iterative_opened_door_",
+          formatC(
+            length(doors),
+            width = 2,
+            format = "d",
+            flag = "0"
+          ),
+          ".png"
+        )
+      )
+    
+    ggsave(
+      img_path,
+      opened_door,
+      width = 12,
+      height = 8
+    )
+    
+    image_read(img_path) %>%
+      image_trim() %>%
+      image_resize("1400x") %>%
+      image_write(img_path)
+    
+  })
+
+door_open_images <- list.files(here::here("_posts", "2022-03-30-advent-calendars-in-march"), pattern = "gg_iterative_opened_door", full.names = TRUE)
+
+
+door_open_images %>%
+  tibble(img = .) %>%
+  map(function(img){image_read(img)}) %>%
+  image_join() %>%
+  image_animate(fps = 0.5) %>%
+  image_write(here::here(
+        "_posts", "2022-03-30-advent-calendars-in-march", "gg_animated_door_openings.gif"))
+
+unlink(door_open_images)
+```
+
+
+
+
