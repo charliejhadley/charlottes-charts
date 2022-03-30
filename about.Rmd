@@ -2,17 +2,35 @@
 title: "About this site"
 description: |
   Is this your... third blog now?
+output: 
+  distill::distill_article:
+    md_extensions: +emoji
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+# Charlotte Hadley
+
+Hey! I'm Charlie ([she/her](https://pronoun.is/she)) and have been teaching and consulting with R and Shiny since 2016.
+
+- I co-run the awesome [R in 3 Months](https://rfortherestofus.com/3months/) programme at [R for the Rest of Us](https://rfortherestofus.com/).
+
+- I have 5 courses about R available on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/charlie-joey-hadley?u=2125562)
+
+- I'm very proud of this [Mapping with R](https://rfortherestofus.com/courses/mapping/) course which is designed for folks without mapping or GIS experience.
+
+As well as these things, I'm a trans and LGBT rights activist :rainbow_flag:. All tech is political. Black Lives Matter.
+
+
+# What's this blog for?
+
 I've had several failed R blogs which tried to do too many things:
 
-- <www.visibledata.co.uk> was designed as the company website for my R consultancy work. It was abandoned in favour of...
+- [www.visibledata.co.uk](www.visibledata.co.uk) was designed as the company website for my R consultancy work. It was abandoned in favour of...
 
-- <www.findingyourway.io> was to accompany a book project I abandoned. It has lots of wonderfully customised (Bootstrap flavoured) CSS.
+- [www.findingyourway.io](www.visibledata.co.uk) was to accompany a book project I abandoned. It has lots of wonderfully customised (Bootstrap flavoured) CSS.
 
 But these days I do my consultancy through the awesome [R for The Rest of Us](https://rfortherestofus.com/) team. That's also where my [fancy markety blogposts](https://rfortherestofus.com/2022/03/heatmaps/).
 
@@ -30,7 +48,7 @@ To prevent this from going the way of the abandoned projects, here are my rules:
 
 The home page shows a list of all blogposts, which is achieved by adding this to the `index.Rmd` file:
 
-```{yml}
+```{verbatim, echo=TRUE}
 ---
 title: "Posts"
 listing: posts
