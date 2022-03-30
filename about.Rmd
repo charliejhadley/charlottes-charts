@@ -1,10 +1,25 @@
 ---
 title: "About this site"
 description: |
-  Some additional details about the website
+  Is this your... third blog now?
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+I've had several failed R blogs which tried to do too many things:
+
+- <www.visibledata.co.uk> was designed as the company website for my R consultancy work. It was abandoned in favour of...
+
+- <www.findingyourway.io> was to accompany a book project I abandoned. It has lots of wonderfully customised (Bootstrap flavoured) CSS.
+
+But these days I do my consultancy through the awesome [R for The Rest of Us](https://rfortherestofus.com/) team. That's also where my [fancy markety blogposts](https://rfortherestofus.com/2022/03/heatmaps/).
+
+This is going to be the home for #30DayChartChallenge, #TidyTuesday and other things.
+
+To prevent this from going the way of the abandoned projects, here are my rules:
+
+- All custom CSS needs to be declared here.
+
+- All {distill} modifications need to be declared here.

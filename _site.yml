@@ -1,7 +1,7 @@
-name: "my-website"
-title: "My Website"
+name: "charlottes-charts"
+title: "Charlotte's Charts"
 description: |
-  My Website
+  Charlotte's charts (and occassional code dump)
 output_dir: "_site"
 navbar:
   right:
