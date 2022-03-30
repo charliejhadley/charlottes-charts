@@ -24,6 +24,22 @@ To prevent this from going the way of the abandoned projects, here are my rules:
 
 - All {distill} modifications need to be declared here.
 
+## Customisations
+
+### Showing recent posts on the home page
+
+The home page shows a list of all blogposts, which is achieved by adding this to the `index.Rmd` file:
+
+```{yml}
+---
+title: "Posts"
+listing: posts
+site: distill::distill_website
+---
+```
+
+To place additional content about the posts I make use of `<d-byline></d-byline>` which forces the content below into a comfortable position.
+
 ## Tutorials used
 
 https://themockup.blog/posts/2020-08-01-building-a-blog-with-distill/
