@@ -23,3 +23,7 @@ To prevent this from going the way of the abandoned projects, here are my rules:
 - All custom CSS needs to be declared here.
 
 - All {distill} modifications need to be declared here.
+
+## Tutorials used
+
+https://themockup.blog/posts/2020-08-01-building-a-blog-with-distill/
