@@ -109,7 +109,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["About this site"]},{"type":"character","attributes":{},"value":["Is this your... third blog now?"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","output"]}},"value":[{"type":"character","attributes":{},"value":["About this site"]},{"type":"character","attributes":{},"value":["Is this your... third blog now?\n"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["md_extensions"]}},"value":[{"type":"character","attributes":{},"value":["+emoji"]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2088,10 +2088,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
 <div class="d-article">
+<h1 id="charlotte-hadley">Charlotte Hadley</h1>
+<p>Hey! I’m Charlie (<a href="https://pronoun.is/she">she/her</a>) and have been teaching and consulting with R and Shiny since 2016.</p>
+<ul>
+<li><p>I co-run the awesome <a href="https://rfortherestofus.com/3months/">R in 3 Months</a> programme at <a href="https://rfortherestofus.com/">R for the Rest of Us</a>.</p></li>
+<li><p>I have 5 courses about R available on <a href="https://www.linkedin.com/learning/instructors/charlie-joey-hadley?u=2125562">LinkedIn Learning</a></p></li>
+<li><p>I’m very proud of this <a href="https://rfortherestofus.com/courses/mapping/">Mapping with R</a> course which is designed for folks without mapping or GIS experience.</p></li>
+</ul>
+<p>As well as these things, I’m a trans and LGBT rights activist <span class="emoji" data-emoji="rainbow_flag">🏳️‍🌈</span>. All tech is political. Black Lives Matter.</p>
+<h1 id="whats-this-blog-for">What’s this blog for?</h1>
 <p>I’ve had several failed R blogs which tried to do too many things:</p>
 <ul>
-<li><p>&lt;www.visibledata.co.uk&gt; was designed as the company website for my R consultancy work. It was abandoned in favour of…</p></li>
-<li><p>&lt;www.findingyourway.io&gt; was to accompany a book project I abandoned. It has lots of wonderfully customised (Bootstrap flavoured) CSS.</p></li>
+<li><p><a href="www.visibledata.co.uk">www.visibledata.co.uk</a> was designed as the company website for my R consultancy work. It was abandoned in favour of…</p></li>
+<li><p><a href="www.visibledata.co.uk">www.findingyourway.io</a> was to accompany a book project I abandoned. It has lots of wonderfully customised (Bootstrap flavoured) CSS.</p></li>
 </ul>
 <p>But these days I do my consultancy through the awesome <a href="https://rfortherestofus.com/">R for The Rest of Us</a> team. That’s also where my <a href="https://rfortherestofus.com/2022/03/heatmaps/">fancy markety blogposts</a>.</p>
 <p>This is going to be the home for #30DayChartChallenge, #TidyTuesday and other things.</p>
@@ -2104,12 +2113,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h3 id="showing-recent-posts-on-the-home-page">Showing recent posts on the home page</h3>
 <p>The home page shows a list of all blogposts, which is achieved by adding this to the <code>index.Rmd</code> file:</p>
 <div class="layout-chunk" data-layout="l-body">
-
+<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>title: &quot;Posts&quot;</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>listing: posts</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>site: distill::distill_website</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>---</span></code></pre></div>
 </div>
 <p>To place additional content about the posts I make use of <code>&lt;d-byline&gt;&lt;/d-byline&gt;</code> which forces the content below into a comfortable position.</p>
 <h2 id="tutorials-used">Tutorials used</h2>
 <p><a href="https://themockup.blog/posts/2020-08-01-building-a-blog-with-distill/" class="uri">https://themockup.blog/posts/2020-08-01-building-a-blog-with-distill/</a></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -1,13 +1,14 @@
 ---
 title: "Advent calendars in March"
 description: |
-  Rehousing an out of date script.
+  Rehousing an old script for making animated advent calendars with {ggplot2}.
 author:
   - name: Charlie Joey Hadley
 date: 2022-03-30
 output:
   distill::distill_article:
     self_contained: false
+preview: gg_animated_door_openings.gif
 ---
 
 ```{r setup, include=FALSE}
