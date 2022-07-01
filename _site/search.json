@@ -5,16 +5,22 @@
       "title": "About this site",
       "description": "Is this your... third blog now?\n",
       "author": [],
-      "contents": "\nCharlotte Hadley\nHey! I’m Charlie (she/her) and have been teaching and consulting with R and Shiny since 2016.\nI co-run the awesome R in 3 Months programme at R for the Rest of Us.\nI have 5 courses about R available on LinkedIn Learning\nI’m very proud of this Mapping with R course which is designed for folks without mapping or GIS experience.\nAs well as these things, I’m a trans and LGBT rights activist 🏳️‍🌈. All tech is political. Black Lives Matter.\nWhat’s this blog for?\nI’ve had several failed R blogs which tried to do too many things:\nwww.visibledata.co.uk was designed as the company website for my R consultancy work. It was abandoned in favour of…\nwww.findingyourway.io was to accompany a book project I abandoned. It has lots of wonderfully customised (Bootstrap flavoured) CSS.\nBut these days I do my consultancy through the awesome R for The Rest of Us team. That’s also where my fancy markety blogposts.\nThis is going to be the home for #30DayChartChallenge, #TidyTuesday and other things.\nTo prevent this from going the way of the abandoned projects, here are my rules:\nAll custom CSS needs to be declared here.\nAll {distill} modifications need to be declared here.\nCustomisations\nShowing recent posts on the home page\nThe home page shows a list of all blogposts, which is achieved by adding this to the index.Rmd file:\n\n---\ntitle: \"Posts\"\nlisting: posts\nsite: distill::distill_website\n---\n\nTo place additional content about the posts I make use of <d-byline><\/d-byline> which forces the content below into a comfortable position.\nTutorials used\nhttps://themockup.blog/posts/2020-08-01-building-a-blog-with-distill/\n\n\n\n",
-      "last_modified": "2022-03-30T19:43:23+01:00"
+      "contents": "\nCharlotte Hadley\nHey! I’m Charlie (she/her) and\nhave been teaching and consulting with R and Shiny since 2016.\nI co-run the awesome R in 3 Months programme\nat R for the Rest of\nUs.\nI have 5 courses about R available on LinkedIn\nLearning\nI’m very proud of this Mapping with R\ncourse which is designed for folks without mapping or GIS\nexperience.\nAs well as these things, I’m a trans and LGBT rights activist 🏳️‍🌈. All tech is\npolitical. Black Lives Matter.\nWhat’s this blog for?\nI’ve had several failed R blogs which tried to do too many\nthings:\nwww.visibledata.co.uk was\ndesigned as the company website for my R consultancy work. It was\nabandoned in favour of…\nwww.findingyourway.io was to\naccompany a book project I abandoned. It has lots of wonderfully\ncustomised (Bootstrap flavoured) CSS.\nBut these days I do my consultancy through the awesome R for The Rest of Us team.\nThat’s also where my fancy markety\nblogposts.\nThis is going to be the home for #30DayChartChallenge, #TidyTuesday\nand other things.\nTo prevent this from going the way of the abandoned projects, here\nare my rules:\nAll custom CSS needs to be declared here.\nAll {distill} modifications need to be declared here.\nCustomisations\nShowing recent posts on\nthe home page\nThe home page shows a list of all blogposts, which is achieved by\nadding this to the index.Rmd file:\n\n---\ntitle: \"Posts\"\nlisting: posts\nsite: distill::distill_website\n---\n\nTo place additional content about the posts I make use of\n<d-byline><\/d-byline> which forces the content\nbelow into a comfortable position.\nTutorials used\nhttps://themockup.blog/posts/2020-08-01-building-a-blog-with-distill/\n\n\n\n",
+      "last_modified": "2022-06-02T14:34:43+01:00"
+    },
+    {
+      "path": "blog.html",
+      "title": "Posts",
+      "author": [],
+      "contents": "\n\nand this!\n\n\n\n",
+      "last_modified": "2022-06-02T14:34:46+01:00"
     },
     {
       "path": "index.html",
-      "title": "Posts",
       "author": [],
-      "contents": "\n\nWelcome!\nThis is Charlotte Hadley’s blog. You’ll usually see me as charliejhadley, but I go by any (of the many) contractions of Charlotte.\nThis blog mostly contains data visualisations and code dumps in the R language.\n\n\n\n",
-      "last_modified": "2022-03-30T19:43:24+01:00"
+      "contents": "\n\n\n\n\n\nCharlotte Joey Hadley\n\n\nHello! I’m an R instructor and data science consultant. ddThis is a\nportfolio of my courses, charts and other things that don’t have a good\nhome elsewhere. I’m also an Open Data and Reproducible Research\nevangelist. :smile:\nI also happen to be trans. All tech is political and our common\nfuture requires intersectionality.\nTraining: #rstats and Data\nScience\n\n\nLinkedIn Learning Courses: I’ve\nbeen producing courses for LinkedIn since 2016. These courses are\nincluded with a LinkedIn Premium subscription or can be purchased a la\ncarte. Out of my 5 courses I particularly recommend:\nBuilding\ndata apps with shiny\ntidyverse\nintro\nhtmlwidgets\n\nAnd this is here now.\n\n\n\n",
+      "last_modified": "2022-06-02T14:34:47+01:00"
     }
   ],
-  "collections": ["posts/posts.json"]
+  "collections": ["posts/posts.json", "home/home.json"]
 }

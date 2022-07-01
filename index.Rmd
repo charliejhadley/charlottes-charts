@@ -1,6 +1,5 @@
 ---
-title: "Posts"
-listing: posts
+listing: home
 site: distill::distill_website
 ---
 
@@ -15,9 +14,28 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <d-byline></d-byline>
 
-# Welcome!
+<center><img src='images/visible-data-logo.png' width='200px' style='padding-top:100px'/></center>
 
-This is Charlotte Hadley's blog. You'll usually see me as [charliejhadley](https://twitter.com/charliejhadley), but I go by any (of the many) contractions of Charlotte.
+<center><h2>Charlotte Joey Hadley</h2></center>
 
-This blog mostly contains data visualisations and code dumps in the R language.
+Hello! I'm an R instructor and data science consultant. This is a portfolio of my courses, charts and other things that don't have a good home elsewhere. I'm also an Open Data and Reproducible Research evangelist. :smile:
 
+I also happen to be trans. All tech is political and our common future requires [intersectionality](https://time.com/5560575/intersectionality-theory/). 
+
+## Training: #rstats and Data Science
+
+<div>
+
+<img src='images/linkedin-learning-courses.png' style='width:250px;float:right;padding-left:15px;padding-top:50px;'/>
+
+<span style='color:darkgrey;'>LinkedIn Learning Courses:</span> I've been producing courses for LinkedIn since 2016. These courses are included with a LinkedIn Premium subscription or can be purchased a la carte. Out of my 5 courses I particularly recommend:
+
+- [Building data apps with shiny](https://www.linkedin.com/learning/building-data-apps-with-r-and-shiny-essential-training)
+
+- [tidyverse intro](https://www.linkedin.com/learning/learning-the-r-tidyverse?u=2125562)
+
+- htmlwidgets
+
+</div>
+
+And this is here now.

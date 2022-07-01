@@ -1,0 +1,127 @@
+---
+title: "Which pch character do I need for {ggplot2}?"
+description: |
+  A short description of the post.
+author:
+  - name: Charlie Joey Hadley
+    url: {}
+date: 2022-05-25
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Distill is a publication format for scientific and technical writing, native to the web.
+
+```{r}
+library(tidyverse)
+library(hrbrthemes)
+library(ggrepel)
+# rebuilding https://blog.albertkuo.me/post/point-shape-options-in-ggplot/#fnref1
+
+pch_tib <- tibble(
+  pch_number = 0:25,
+  pch_description = c(rep("Outline", 15),
+                      rep("Fill", 6),
+                      rep("Both", 5))
+) %>% 
+  mutate(pch_description = as_factor(pch_description),
+         pch_description = fct_relevel(pch_description, c("Outline",
+                                                          "Fill",
+                                                          "Both")))
+pch_outline <- pch_tib %>% 
+  filter(pch_description == "Outline") %>% 
+  mutate(x = rep(1:5, 3),
+         y = rev(sort(rep(c("a", "b", "c"), 5))))
+
+
+pch_fill <- pch_tib %>% 
+  filter(pch_description == "Fill") %>% 
+  mutate(x = 1:6,
+         y = rep("d", 6))
+
+pch_both <- pch_tib %>% 
+  filter(pch_description == "Both") %>% 
+  mutate(x = 1:5,
+         y = rep("e", 5))
+```
+
+
+```{r}
+gg_pch_space_fixed <- pch_outline %>% 
+  bind_rows(pch_fill, pch_both) %>% 
+  ggplot(aes(x = x,
+             y = y,
+             pch = pch_number)) +
+  geom_point(fill = "lightskyblue3",
+             color = "black",
+             size = 5) +
+  geom_text(aes(label = pch_number),
+            nudge_y = 0.2) +
+  facet_grid(pch_description ~ .,
+             scales = "free_y", switch = "y", 
+             space = "fixed"
+             ) +
+  scale_shape_identity() +
+  labs(title = 'Using facet_grid(space = "fixed")') +
+  theme_ipsum() + 
+  theme(strip.text.y.left =  element_text(angle = 0),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank())
+
+
+gg_pch_space_fixed %>% 
+  ggsave(here::here("_posts", "2022-05-25-which-pch-character-do-i-need-for-ggplot2", "gg_pch_space_fixed.png"),
+         .,
+         width = 7,
+         height = 5,
+         bg = "white")
+
+```
+
+```{r}
+gg_pch_space_free <- pch_outline %>% 
+  bind_rows(pch_fill, pch_both) %>% 
+  ggplot(aes(x = x,
+             y = y,
+             pch = pch_number)) +
+  geom_point(fill = "lightskyblue3",
+             color = "black",
+             size = 5) +
+  geom_text(aes(label = pch_number),
+            nudge_y = 0.4) +
+  facet_grid(pch_description ~ .,
+             scales = "free_y", switch = "y", 
+             space = "free"
+             ) +
+  scale_shape_identity() +
+  labs(title = 'Using facet_grid(space = "free")') +
+  theme_ipsum() + 
+  theme(strip.text.y.left =  element_text(angle = 0),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank())
+
+
+gg_pch_space_free %>% 
+  ggsave(here::here("_posts", "2022-05-25-which-pch-character-do-i-need-for-ggplot2", "gg_pch_space_free.png"),
+         .,
+         width = 7,
+         height = 5,
+         bg = "white")
+
+```
+
+
